@@ -9,7 +9,7 @@ function Ball(x, y)
     this.position = createVector(x,y);
 
 
-    Ball.prototype.seek = function(Vector target)
+    /*Ball.prototype.seek = function(Vector target)
     {
 	//PVector desired = PVector.sub(target,location);
 	this.desired = createVector(0,0);
@@ -31,5 +31,5 @@ function Ball(x, y)
     {
 	this.position.add(this.velocity);
 	this.velocity.add(this.acceleration);
-    }
+    }*/
 }

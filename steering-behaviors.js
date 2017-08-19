@@ -1,15 +1,29 @@
 var balls = [];
+var font;
 
+function preload()
+{
+    font = loadFont('Asimov.otf');
+}
 function setup()
 {
-    createCanvas(1200, 550);
+    createCanvas(600, 600);
+    background(0);
     textSize(200);
-    noStroke();
-    text("Test", 200, 200)
+    fill(255);
+    //text("Test", 100, 300)
+
+    var points = font.textToPoints('Test', 100,300);
+    points.forEach(function(p)
+    {
+	console.log(p);
+	stroke(255);
+	strokeWeight(8);
+	point(p.x, p.y);
+    });
 }
 
 function draw()
 {
-    background(0);
 
 }
