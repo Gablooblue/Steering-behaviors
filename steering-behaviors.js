@@ -1,5 +1,6 @@
 var balls = [];
 var font;
+var scramble = false;
 
 function preload()
 {
@@ -26,8 +27,27 @@ function draw()
     background(0);
     balls.forEach(function(ball)
     {
-	ball.applyBehaviors();
+	if(!scramble)
+	{
+	    ball.applyBehaviors();
+	}
+	else
+	{
+	    ball.scramble();
+	}
 	ball.update();
 	ball.show();
     });
+}
+
+function mousePressed()
+{
+    if(scramble)
+    {
+	scramble = false;
+    }
+    else
+    {
+	scramble = true;
+    }
 }

@@ -76,4 +76,19 @@ function Ball(x, y)
 
 	return steer;
     }
+
+    Ball.prototype.scramble = function()
+    {
+	var desired = p5.Vector.sub(this.target, this.position);
+	var d = desired.mag();
+	desired.mult(-100);
+	var speed = this.max_speed;
+	desired.normalize();
+	desired.setMag(speed);
+	var steer = p5.Vector.sub(desired, this.velocity);
+	steer.limit(this.max_force);
+
+	this.applyForce(steer);
+
+    }
 }
