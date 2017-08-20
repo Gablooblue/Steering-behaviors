@@ -1,6 +1,6 @@
 function Ball(x, y)
 {
-    this.max_speed = 0.5;
+    this.max_speed = 5;
     this.max_force = 4;
 
 
@@ -15,6 +15,10 @@ function Ball(x, y)
     {
 	var seek = this.seek(this.target);
 	this.applyForce(seek);
+
+	var mouse = createVector(mouseX, mouseY);
+	var flee = this.flee(mouse)
+	this.applyForce(flee);
     }
     Ball.prototype.seek = function(target)
     {
@@ -50,5 +54,26 @@ function Ball(x, y)
 	stroke(255);
 	strokeWeight(8)
 	point(this.position.x, this.position.y);
+    }
+    Ball.prototype.flee= function(target)
+    {
+	var desired = p5.Vector.sub(target, this.position);
+	var d = desired.mag();
+	var speed = this.max_speed;
+	if(d < 50)
+	{
+	    desired.mult(-1);
+	    desired.normalize();
+	    desired.setMag(speed);
+	    var steer = p5.Vector.sub(desired, this.velocity);
+	    steer.limit(this.max_force);
+	}
+	else
+	{
+	    steer = createVector(0, 0);
+	}
+
+
+	return steer;
     }
 }
