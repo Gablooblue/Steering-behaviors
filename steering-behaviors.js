@@ -1,7 +1,7 @@
 var balls = [];
 var font;
 var scramble = false;
-var displayText = "Fag";
+var words = ["Test"];
 
 function preload()
 {
@@ -13,9 +13,14 @@ function setup()
     background(0);
     fill(255);
     textSize(200);
-    textAlign(CENTER);
+    input = createInput();
+    input.position(10, 10);
+    button = createButton("Add word");
+    button.position(input.x + input.width, 10);
+    button.mousePressed(addWord);
 
-    var points = font.textToPoints(displayText, 100, 300);
+
+    var points = font.textToPoints(words.pop(), 100, 300);
     points.forEach(function(p)
     {
 	var ball = new Ball(p.x, p.y);
@@ -51,13 +56,12 @@ function mousePressed()
     {
 	scramble = true;
     }*/
-    changeWord();
+    changeWord(words.pop());
 }
 
-function changeWord()
+function changeWord(word)
 {
-    displayText= "T";
-    var points = font.textToPoints(displayText, 100, 300);
+    var points = font.textToPoints(word, 100, 300);
     moveAll(1000);
     if(balls <= points)
     {
@@ -99,5 +103,12 @@ function moveAll(m)
        ball.update();
        ball.show();
    });
+}
+
+function addWord()
+{
+    var word = input.value();
+    words.push(word);
+    input.value('');
 }
 

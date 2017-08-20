@@ -1,6 +1,6 @@
 function Ball(x, y)
 {
-    this.max_speed = 5;
+    this.max_speed = 6;
     this.max_force = 4;
 
 
