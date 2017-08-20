@@ -16,14 +16,17 @@ function setup()
     var points = font.textToPoints('Test', 100,300);
     points.forEach(function(p)
     {
-	console.log(p);
-	stroke(255);
-	strokeWeight(8);
-	point(p.x, p.y);
+	var ball = new Ball(p.x, p.y);
+	balls.push(ball);
     });
 }
 
 function draw()
 {
-
+    background(0);
+    balls.forEach(function(ball)
+    {
+	ball.update();
+	ball.show();
+    });
 }

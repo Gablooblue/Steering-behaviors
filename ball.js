@@ -6,6 +6,7 @@ function Ball(x, y)
 
     this.acceleration = createVector(0,0);
     this.velocity = createVector(0,0);
+    this.target = createVector(x,y);
     this.position = createVector(x,y);
 
 
@@ -25,11 +26,18 @@ function Ball(x, y)
     Ball.prototype.applyForce = function(Vector force)
     {
 	acceleration.add(force);
-    }
+    }*/
 
-    function update()
+    Ball.prototype.update = function()
     {
 	this.position.add(this.velocity);
 	this.velocity.add(this.acceleration);
-    }*/
+    }
+    
+    Ball.prototype.show = function()
+    {
+	stroke(255);
+	strokeWeight(8)
+	point(this.position.x, this.position.y);
+    }
 }
