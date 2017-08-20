@@ -26,6 +26,7 @@ function draw()
     background(0);
     balls.forEach(function(ball)
     {
+	ball.applyBehaviors();
 	ball.update();
 	ball.show();
     });
