@@ -5,10 +5,11 @@ function Ball(x, y)
 
 
     this.acceleration = createVector(0,0);
-    //this.velocity = createVector(0,0);
+    this.velocity = createVector(0,0);
     this.velocity = p5.Vector.random2D();
     this.target = createVector(x,y);
-    this.position = createVector(x,y);
+    //this.position = createVector(x,y);
+    this.position = createVector(random(width), random(height));
 
 
     Ball.prototype.applyBehaviors = function()
@@ -55,6 +56,7 @@ function Ball(x, y)
 	strokeWeight(8)
 	point(this.position.x, this.position.y);
     }
+
     Ball.prototype.flee= function(target)
     {
 	var desired = p5.Vector.sub(target, this.position);
@@ -77,11 +79,12 @@ function Ball(x, y)
 	return steer;
     }
 
-    Ball.prototype.scramble = function()
+    Ball.prototype.attract = function(multiplier)
     {
-	var desired = p5.Vector.sub(this.target, this.position);
+	var target = createVector(random(width), random(height))
+	var desired = p5.Vector.sub(target, this.position);
 	var d = desired.mag();
-	desired.mult(-100);
+	desired.mult(multiplier);
 	var speed = this.max_speed;
 	desired.normalize();
 	desired.setMag(speed);
@@ -91,4 +94,11 @@ function Ball(x, y)
 	this.applyForce(steer);
 
     }
+    
+    Ball.prototype.changeTarget = function(x, y)
+    {
+	this.target.x = x;
+	this.target.y = y;
+    }
+    
 }
