@@ -1,7 +1,7 @@
 var balls = [];
 var font;
 var scramble = false;
-var words = ["Test"];
+var words = [""];
 
 function preload()
 {
@@ -15,9 +15,14 @@ function setup()
     textSize(200);
     input = createInput();
     input.position(10, 10);
-    button = createButton("Add word");
-    button.position(input.x + input.width, 10);
-    button.mousePressed(addWord);
+    submitButton = createButton("Add word");
+    submitButton.position(input.x + input.width, 10);
+    submitButton.mousePressed(addWord);
+
+    scrambleButton = createButton("Toggle Scramble")
+    scrambleButton.position(submitButton.x + submitButton.width, 10);
+    scrambleButton.mousePressed(scrambleWords);
+    
 
 
     var points = font.textToPoints(words.pop(), 100, 300);
@@ -46,17 +51,9 @@ function draw()
     }
 }
 
-function mousePressed()
+function scrambleWords()
 {
-    /*if(scramble)
-    {
-	scramble = false;
-    }
-    else
-    {
-	scramble = true;
-    }*/
-    changeWord(words.pop());
+    scramble = !scramble;
 }
 
 function changeWord(word)
@@ -110,5 +107,6 @@ function addWord()
     var word = input.value();
     words.push(word);
     input.value('');
+    changeWord(words.pop());
 }
 
