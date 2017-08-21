@@ -3,24 +3,22 @@ function Ball(x, y)
     this.max_speed = 6;
     this.max_force = 4;
 
-
     this.acceleration = createVector(0,0);
     this.velocity = createVector(0,0);
     this.velocity = p5.Vector.random2D();
     this.target = createVector(x,y);
-    //this.position = createVector(x,y);
     this.position = createVector(random(width), random(height));
-
 
     Ball.prototype.applyBehaviors = function()
     {
 	var seek = this.seek(this.target);
-	this.applyForce(seek);
-
 	var mouse = createVector(mouseX, mouseY);
 	var flee = this.flee(mouse)
+
+	this.applyForce(seek);
 	this.applyForce(flee);
     }
+
     Ball.prototype.seek = function(target)
     {
 	var desired = p5.Vector.sub(target, this.position);
@@ -28,7 +26,7 @@ function Ball(x, y)
 	var speed = this.max_speed;
 	if(d < 100)
 	{
-	    speed = map(d, 0, 100, 0, this.max_speed);
+	   speed = map(d, 0, 100, 0, this.max_speed);
 	}
 	desired.normalize();
 	desired.setMag(speed);
@@ -57,7 +55,7 @@ function Ball(x, y)
 	point(this.position.x, this.position.y);
     }
 
-    Ball.prototype.flee= function(target)
+    Ball.prototype.flee = function(target)
     {
 	var desired = p5.Vector.sub(target, this.position);
 	var d = desired.mag();
@@ -74,7 +72,6 @@ function Ball(x, y)
 	{
 	    steer = createVector(0, 0);
 	}
-
 
 	return steer;
     }
